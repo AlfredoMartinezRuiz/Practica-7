@@ -110,3 +110,5 @@ int comprobarCoincidencia (int bloque){
     return 0;
 }
 
+
+

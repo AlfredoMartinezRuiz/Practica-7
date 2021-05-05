@@ -10,8 +10,11 @@
 # include <time.h>
 # include<sys/ipc.h>
 # include<sys/shm.h>
+#include <signal.h> 
 
 # define NBLOQUES 11
+
+
 
 /* Teclas para controlar al mono*/
 # define ESCAPE 27
