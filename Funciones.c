@@ -12,6 +12,43 @@ void crearVentana(){
     // Obtenemos resolución en espacios y renglones
 	maxX = getmaxx(juego); 
 	maxY = getmaxy(juego);
+    posX = (maxX/2)-2;
+    posY = maxY-6;
+}
+
+void menuInicio(){
+    move(maxY/2-7, maxX/2);
+    printw("Bienvenido a Metoro, escoja la dificultad: ");
+    move(maxY/2-6, maxX/2);
+    printw("1. KINDER:");
+    move(maxY/2-5, maxX/2);
+    printw("2. BAJA ");
+    move(maxY/2-4, maxX/2);
+    printw("3. MEDIA: ");
+    move(maxY/2-3, maxX/2);
+    printw("4. ALTA: ");
+    move(maxY/2-2, maxX/2);
+    printw("5. ESTO ES IMPOSIBLE: ");
+    int opcion;
+    scanw("%d", &opcion);
+    switch (opcion)
+    {
+    case 1:
+        velocidad = KINDER;
+        break;
+    case 2:
+        velocidad= BAJA;
+        break;
+    case 3:
+        velocidad = MEDIA;
+        break;
+    case 4:
+        velocidad = ALTA;
+        break;
+    case 5:
+        velocidad = IMPOSIBLE;
+        break;    
+    }
 }
 
 
@@ -58,7 +95,8 @@ void dibujar(){
 }
 
 void mover(int posicion){
-    posX = posX + posicion; // Mueve la posicion en n espacios dados
+    if((posX + posicion >= 0) && (posX + posicion <= maxX-5)) // limita el movimiento del mono para que no se salga del borde 
+        posX = posX + posicion; // Mueve la posicion en n espacios dados
 }
 
 void moverBloquesY(){ // Mueve la dirección de los bloques un renglón abajo
@@ -69,7 +107,10 @@ void moverBloquesY(){ // Mueve la dirección de los bloques un renglón abajo
 
 void generadorBloque(int bloque){ // Genera de manera aleatoria la posicion en y de los bloques para que aparezcan nuevamente
     int renglonRandom = rand() % 30;
+    int espacioRandom = rand() % 105;
     direccionesBloques[bloque][1] = -renglonRandom;
+    direccionesBloques[bloque][0] = espacioRandom;
+
 }
 
 int comprobarCoincidencia (int bloque){
@@ -80,10 +121,6 @@ int comprobarCoincidencia (int bloque){
     // Posicion del caracter la cabeza - 2 espacios
     int mX = posX;
     int mY = posY;
-    //move(0, 0);
-    //printw("bX: %d, bY: %d \n", bX, bY);
-    //printw("mX: %d, mY: %d \n", mX, mY);    
-    //refresh();
     // Algoritmo de comprobación de coincidencia (recomendado no mover)
     for(int f_bloque = bY; f_bloque < bY+2; f_bloque++){ // Recorre los dos renglones del bloque        
         for(int e_bloque = bX; e_bloque < bX+2; e_bloque++){ // Recorre los dos espacios del bloque

@@ -12,13 +12,12 @@ int main(){
 	/* c�digo principal de ejecuci�n */
 	
 	crearVentana(); // Creamos la ventana
+	menuInicio(); 
 
 	
 	/*Compartiendo las coordeanadas del mono entre los procesos*/
 	int *xM = shmat(shmget(ftok("Prac7",'k'), sizeof(int),IPC_CREAT|0600), 0, 0);
 	int *yM = shmat(shmget(ftok("Prac7",'k'), sizeof(int),IPC_CREAT|0600), 0, 0);
-	*xM = posX;
-	*yM = posY;
 	int contador =0;
 
 	for(int i=0; i<NBLOQUES; i++) // Generamos la posicion aleatoria en y de los bloques
@@ -27,16 +26,16 @@ int main(){
 	pid_t pid;
 	pid = fork();
 	if(pid == 0){ // Proceso encargado de dibujar 
+		*xM = posX;
+		*yM = posY;
 		while (1){
 			posX = *xM;
 			moverBloquesY(); // Dezplaza de forma vertical los bloques 
 			
 			for(int i = 0; i<NBLOQUES; i++){ // Comprueba que el mono no se coche con algun bloque
-			
-				
 				if(comprobarCoincidencia(i) == 1){ // Si llegaran a chocar
-					clear();
-					printw("Perdiste :c");
+					//clear();
+					printw("Perdiste %d, %d:c", posX, posY);
 					printw("\npuntaje: %d", puntaje);
 					printw("\nTiempo: %d", seg);
 					printw("\nDesea continuar: \nPresione ESC para salir \nPresione ENTER para continuar");
@@ -50,6 +49,9 @@ int main(){
 					else if(key == ENTER){	//Si presiona la tecla "enter"
 						puntaje = 0;
 						seg = 0;
+						*xM = (maxX/2)-2;
+						posX = (maxX/2)-2;
+						//*xM = posX;
 						//Volvemos a generar los bloques desde el arriba
 						for(int i=0; i<NBLOQUES; i++) // Generamos la posicion aleatoria en y de los bloques
 						generadorBloque(i);
@@ -57,13 +59,10 @@ int main(){
 						//Se necesita convertir en funcion los procesos para volver a empezarlo 
 					}
 					else{
-						printw("Error al ejegir");
+						printw("Error al elegir");
 					}
 					
 					fflush(stdin);
-
-					
-	
 				}
 				else{ //Contar el puntaje
 					puntaje=puntaje+i;
@@ -79,7 +78,7 @@ int main(){
 				contador = 0;
 				seg++;
 			}
-			usleep(MEDIA); // Velocidad de los frames
+			usleep(velocidad); // Velocidad de los frames
 						
 		}
 		
@@ -88,24 +87,19 @@ int main(){
 	
 	else{ // Proceso encargado de detectar movimiento del mono
 		while(1){
-			posX = *xM;
+			
 			noecho();        
     		cbreak();
     		signal(SIGTERM,finalizar);
 			int key = getch();
 			
 			if(key == IZQUIERDA){	//Si presiona la tecla "a"
+				posX = *xM;
 				mover(-2);
 			}
 			else if(key == DERECHA){	//Si presiona la tecla "d"
+				posX = *xM;
 				mover(2);
-			}
-			else if(key == ESCAPE){	//Si presiona la tecla "esc"
-				//return 0;
-				
-			}
-			else if(key == ENTER){	//Si presiona la tecla "enter"
-
 			}
 			else{	//Si no se mueve a la derecha o izquierda imprime lo siguiente, esto se puede cambiar para que no imprima nada o no se mueva
 					//Lo hice para ver que el movimiento se haga correctamente
@@ -113,8 +107,6 @@ int main(){
 			}
 			*xM = posX;
 		} 
-		sleep(5);
-			
 			
 	}
 		
