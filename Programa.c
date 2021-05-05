@@ -36,11 +36,9 @@ int main(){
 				
 				if(comprobarCoincidencia(i) == 1){ // Si llegaran a chocar
 					clear();
-					printw("Perdiste :c");
-					printw("\npuntaje: %d", puntaje);
-					printw("\nTiempo: %d", seg);
-					printw("\nDesea continuar: \nPresione ESC para salir \nPresione ENTER para continuar");
-					refresh();
+					
+					gameOver(); //Imprime puntaje, segundos, y si deseamos continuar
+					
 					int key = getch();
 					if(key == ESCAPE){	//Si presiona la tecla "esc"
 						endwin();

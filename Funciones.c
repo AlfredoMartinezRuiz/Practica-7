@@ -4,8 +4,7 @@
 
 /* c�digo implementaci�n de todas las funciones */
 void crearVentana(){
-    initscr(); // Crea la ventana   
-    juego = newwin(0,0,0,0);
+    juego = initscr(); // Crea la ventana   
     start_color(); // Inicia los colores
     init_pair(1, COLOR_BLACK, COLOR_BLUE); // Colores para el fondo
     bkgd(COLOR_PAIR(1)); // Pone color al fondo
@@ -67,6 +66,7 @@ void moverBloquesY(){ // Mueve la dirección de los bloques un renglón abajo
     }
 }
 
+
 void generadorBloque(int bloque){ // Genera de manera aleatoria la posicion en y de los bloques para que aparezcan nuevamente
     int renglonRandom = rand() % 30;
     direccionesBloques[bloque][1] = -renglonRandom;
@@ -113,6 +113,30 @@ int comprobarCoincidencia (int bloque){
         }                     
     }
     return 0;
+}
+
+
+void gameOver(){//Imprime puntaje, segundos, y si deseamos continuar
+                    move(0,70);
+                    printw("Perdiste :c\n");
+                    
+                    move(2,70);
+                    printw("Puntaje: %d\n", puntaje);
+                
+                    move(3,70);
+                    printw("Tiempo: %d\n", seg);
+    
+                    move(5,70);
+                    printw("¿Qué desea hacer? \n");
+
+                    move(6,70);
+                    printw("Presione tres veces ESC para salir \n");
+
+                    move(7,70);
+                    printw("Presione tres veces ENTER para continuar \n");
+
+                    refresh();
+    
 }
 
 
