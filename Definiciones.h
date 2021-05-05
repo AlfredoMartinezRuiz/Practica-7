@@ -49,6 +49,6 @@ void mover(int alteracion); // Alteracion para mover al mono:  (-1, 1 a la izqui
 void moverBloquesY(); // Función que mueve los bloques un renglon abajo
 void generadorBloque(int bloque); // Genera las posiciones aleatorias de los bloques
 int comprobarCoincidencia(); // Comprueba si chocan o no algún bloque
-void crearVentana2();
+void gameOver();
 
 # endif

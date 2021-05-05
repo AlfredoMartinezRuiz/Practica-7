@@ -34,12 +34,10 @@ int main(){
 			
 			for(int i = 0; i<NBLOQUES; i++){ // Comprueba que el mono no se coche con algun bloque
 				if(comprobarCoincidencia(i) == 1){ // Si llegaran a chocar
-					//clear();
-					printw("Perdiste %d, %d:c", posX, posY);
-					printw("\npuntaje: %d", puntaje);
-					printw("\nTiempo: %d", seg);
-					printw("\nDesea continuar: \nPresione ESC para salir \nPresione ENTER para continuar");
-					refresh();
+					clear();
+					
+					gameOver(); //Imprime puntaje, segundos, y si deseamos continuar
+					
 					int key = getch();
 					if(key == ESCAPE){	//Si presiona la tecla "esc"
 						endwin();
