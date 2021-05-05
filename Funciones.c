@@ -11,9 +11,11 @@ void crearVentana(){
     // Obtenemos resolución en espacios y renglones
 	maxX = getmaxx(juego); 
 	maxY = getmaxy(juego);
+
 }
 
-void dibujar(){
+void dibujar(int c){
+    
     clear();
     /* Pintura del monito */    
     move(posY, posX);
@@ -49,6 +51,7 @@ void dibujar(){
             }
         }  
     }
+    c++;
     refresh();
 }
 

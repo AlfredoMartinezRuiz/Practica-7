@@ -15,7 +15,7 @@
 
 /* Teclas para controlar al mono*/
 # define ESCAPE 27
-# define ENTER 10
+# define ENTER 114
 # define IZQUIERDA 97
 # define DERECHA 100
 
@@ -28,6 +28,7 @@
 /* Para obtener tamaño de ventanas*/
 int maxX;
 int maxY;
+int contador_local = 0;
 
 /* Declaracion de las vars principales */
 WINDOW *juego; 
@@ -51,5 +52,6 @@ void mover(int alteracion); // Alteracion para mover al mono:  (-1, 1 a la izqui
 void moverBloquesY(); // Función que mueve los bloques un renglon abajo
 void generadorBloque(int bloque); // Genera las posiciones aleatorias de los bloques
 int comprobarCoincidencia(); // Comprueba si chocan o no algún bloque
+void dibujar(int c);
 
 # endif
