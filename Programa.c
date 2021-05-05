@@ -1,8 +1,6 @@
 /* Programa principal */ 
 # include "Definiciones.h"
 # include "Funciones.c"
-//# include "allegro.h"
-//int puntaje = 0;
 
 void finalizar(int snum){
 		exit(0);
@@ -67,7 +65,8 @@ int main(){
 			dibujar(); // Dibuja (representa un frame)
 			contador++;
 			usleep(velocidad); // Velocidad de los frames
-			int frames_por_sec = 1000000/velocidad; // Calula cuandos frames hay por segundo
+			int frames_por_sec = 1000000/velocidad; /* Calula cuandos frames hay por segundo 
+			-> n_microsegundos en un segundo/microsegundos por cada frame */
 			if(contador == frames_por_sec){ // Verifica si ya concurrió un segundo
 				contador = 0;
 				seg++;
