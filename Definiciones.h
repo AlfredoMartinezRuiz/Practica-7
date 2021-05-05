@@ -8,13 +8,30 @@
 # include <pthread.h> 
 # include <unistd.h> 
 # include <time.h>
+# include<sys/ipc.h>
+# include<sys/shm.h>
+
 # define NBLOQUES 11
+
+/* Teclas para controlar al mono*/
+# define ESCAPE 27
+# define ENTER 10
+# define IZQUIERDA 97
+# define DERECHA 100
+
+/* Velociad de los bloques(frames) */
+# define TEST 120000
+# define BAJA 90000
+# define MEDIA 60000
+# define ALTA 40000
+
+/* Para obtener tamaño de ventanas*/
 int maxX;
 int maxY;
 
 /* Declaracion de las vars principales */
 WINDOW *juego; 
-int posX = 60, posY = 20; // Variables para controlar al humano
+int posX = 60, posY = 31; // Variables para controlar al humano
 int direccionesBloques[NBLOQUES][2] = {{2, 0}, // {espacio, renglon}
                                 {12, 0},
                                 {22, 0},
@@ -29,18 +46,10 @@ int direccionesBloques[NBLOQUES][2] = {{2, 0}, // {espacio, renglon}
                             }; // [filas][columnas]          
 
 /* Declaracion de las funciones principales*/
-void pintarFondo(); // Función que se va encargar de generar el fondo
+void crearVentana(); // Función que se va encargar de generar el fondo
 void mover(int alteracion); // Alteracion para mover al mono:  (-1, 1 a la izquierda) y (1, 1 a la derecha)
 void moverBloquesY(); // Función que mueve los bloques un renglon abajo
 void generadorBloque(int bloque); // Genera las posiciones aleatorias de los bloques
-int comprobarCoincidencia(); // Comprueba si cochan o no algún bloque
-
-void dibujarBloque(float x, float y);
-void moverBloques();
-void tiempo();
-int menu();
-void salir();
-void dibujar();
-void escucharTeclas();
+int comprobarCoincidencia(); // Comprueba si chocan o no algún bloque
 
 # endif
