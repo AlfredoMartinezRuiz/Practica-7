@@ -15,7 +15,7 @@
 
 /* Teclas para controlar al mono*/
 # define ESCAPE 27
-# define ENTER 10
+# define ENTER 114
 # define IZQUIERDA 97
 # define DERECHA 100
 
@@ -46,10 +46,11 @@ int direccionesBloques[NBLOQUES][2] = {{2, 0}, // {espacio, renglon}
                             }; // [filas][columnas]          
 
 /* Declaracion de las funciones principales*/
-void crearVentana(); // Función que se va encargar de generar el fondo
+void crearVentana(int c); // Función que se va encargar de generar el fondo
 void mover(int alteracion); // Alteracion para mover al mono:  (-1, 1 a la izquierda) y (1, 1 a la derecha)
 void moverBloquesY(); // Función que mueve los bloques un renglon abajo
 void generadorBloque(int bloque); // Genera las posiciones aleatorias de los bloques
 int comprobarCoincidencia(); // Comprueba si chocan o no algún bloque
+void dibujar(int c);
 
 # endif

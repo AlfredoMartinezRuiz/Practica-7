@@ -3,7 +3,7 @@
 # include "Definiciones.h"
 
 /* c�digo implementaci�n de todas las funciones */
-void crearVentana(){
+void crearVentana(int c){
     juego = initscr(); // Crea la ventana   
     start_color(); // Inicia los colores
     init_pair(1, COLOR_BLACK, COLOR_BLUE); // Colores para el fondo
@@ -11,9 +11,12 @@ void crearVentana(){
     // Obtenemos resolución en espacios y renglones
 	maxX = getmaxx(juego); 
 	maxY = getmaxy(juego);
+     c = 0;
+
 }
 
-void dibujar(){
+void dibujar(int c){
+    
     clear();
     /* Pintura del monito */    
     move(posY, posX);
@@ -49,6 +52,7 @@ void dibujar(){
             }
         }  
     }
+    c++;
     refresh();
 }
 
