@@ -10,8 +10,11 @@
 # include <time.h>
 # include<sys/ipc.h>
 # include<sys/shm.h>
+#include <signal.h> 
 
 # define NBLOQUES 11
+
+
 
 /* Teclas para controlar al mono*/
 # define ESCAPE 27
@@ -28,9 +31,11 @@
 /* Para obtener tamaño de ventanas*/
 int maxX;
 int maxY;
+int seg = 0; 
+int puntaje = 0;
 
 /* Declaracion de las vars principales */
-WINDOW *juego; 
+WINDOW *juego;  
 int posX = 60, posY = 31; // Variables para controlar al humano
 int direccionesBloques[NBLOQUES][2] = {{2, 0}, // {espacio, renglon}
                                 {12, 0},
@@ -51,5 +56,6 @@ void mover(int alteracion); // Alteracion para mover al mono:  (-1, 1 a la izqui
 void moverBloquesY(); // Función que mueve los bloques un renglon abajo
 void generadorBloque(int bloque); // Genera las posiciones aleatorias de los bloques
 int comprobarCoincidencia(); // Comprueba si chocan o no algún bloque
+void crearVentana2();
 
 # endif

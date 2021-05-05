@@ -4,7 +4,8 @@
 
 /* c�digo implementaci�n de todas las funciones */
 void crearVentana(){
-    juego = initscr(); // Crea la ventana   
+    initscr(); // Crea la ventana   
+    juego = newwin(0,0,0,0);
     start_color(); // Inicia los colores
     init_pair(1, COLOR_BLACK, COLOR_BLUE); // Colores para el fondo
     bkgd(COLOR_PAIR(1)); // Pone color al fondo
@@ -12,6 +13,7 @@ void crearVentana(){
 	maxX = getmaxx(juego); 
 	maxY = getmaxy(juego);
 }
+
 
 void dibujar(){
     clear();
@@ -49,6 +51,9 @@ void dibujar(){
             }
         }  
     }
+    move(0,0);
+    printw("Puntaje: %d\n",puntaje);
+    printw("Time: %d\n",seg);
     refresh();
 }
 
@@ -109,4 +114,6 @@ int comprobarCoincidencia (int bloque){
     }
     return 0;
 }
+
+
 
