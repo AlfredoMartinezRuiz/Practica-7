@@ -71,10 +71,8 @@ int main(){
 			if(contador == frames_por_sec){ // Verifica si ya concurrió un segundo
 				contador = 0;
 				seg++;
-			}
-						
-		}
-		
+			}						
+		}		
 	exit(0);	
 	}
 	
@@ -99,9 +97,7 @@ int main(){
 				printw(".");
 			}
 			*xM = posX;
-		} 
-			
-	}
-		
+		}			
+	}		
 	return 0;
 }

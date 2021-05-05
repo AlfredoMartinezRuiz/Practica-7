@@ -33,8 +33,10 @@
 /* Para obtener tamaño de ventanas*/
 int maxX;
 int maxY;
+/* Para el tiempo y puntaje */
 int seg = 0; 
 int puntaje = 0;
+/* Para velocidad del juego */
 int velocidad;
 
 /* Declaracion de las vars principales */
