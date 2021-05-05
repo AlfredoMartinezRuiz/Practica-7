@@ -15,7 +15,7 @@
 
 /* Teclas para controlar al mono*/
 # define ESCAPE 27
-# define ENTER 10
+# define ENTER 114
 # define IZQUIERDA 97
 # define DERECHA 100
 
