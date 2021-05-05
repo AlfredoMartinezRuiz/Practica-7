@@ -5,14 +5,13 @@
 //int puntaje = 0;
 
 void finalizar(int snum){
-		//printf("finalisechion");
 		exit(0);
 }
 int main(){	
 	/* c�digo principal de ejecuci�n */
 	
 	crearVentana(); // Creamos la ventana
-	menuInicio(); 
+	menuInicio();  // Hacemos el menu para escoger dificultad
 
 	
 	/*Compartiendo las coordeanadas del mono entre los procesos*/
@@ -49,12 +48,10 @@ int main(){
 						seg = 0;
 						*xM = (maxX/2)-2;
 						posX = (maxX/2)-2;
-						//*xM = posX;
-						//Volvemos a generar los bloques desde el arriba
+						//Volvemos a generar los bloques desde el arriba de forma aleatoria otra vez
 						for(int i=0; i<NBLOQUES; i++) // Generamos la posicion aleatoria en y de los bloques
-						generadorBloque(i);
+							generadorBloque(i);
 						break;
-						//Se necesita convertir en funcion los procesos para volver a empezarlo 
 					}
 					else{
 						printw("Error al elegir");
@@ -64,19 +61,17 @@ int main(){
 				}
 				else{ //Contar el puntaje
 					puntaje=puntaje+i;
-					//printw("puntaje: %d", puntaje);
-				//	refresh();
-				}
-				
+				}			
 				
 			}
 			dibujar(); // Dibuja (representa un frame)
 			contador++;
-			if(contador == 15){
+			usleep(velocidad); // Velocidad de los frames
+			int frames_por_sec = 1000000/velocidad; // Calula cuandos frames hay por segundo
+			if(contador == frames_por_sec){ // Verifica si ya concurrió un segundo
 				contador = 0;
 				seg++;
 			}
-			usleep(velocidad); // Velocidad de los frames
 						
 		}
 		
@@ -88,7 +83,7 @@ int main(){
 			
 			noecho();        
     		cbreak();
-    		signal(SIGTERM,finalizar);
+    		signal(SIGTERM, finalizar);
 			int key = getch();
 			
 			if(key == IZQUIERDA){	//Si presiona la tecla "a"

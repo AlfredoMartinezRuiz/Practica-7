@@ -16,18 +16,19 @@ void crearVentana(){
 }
 
 void menuInicio(){
-    move(maxY/2-7, maxX/2);
+    move(maxY/2-4, maxX/2-21);
     printw("Bienvenido a Metoro, escoja la dificultad: ");
-    move(maxY/2-6, maxX/2);
+    move(maxY/2-3, maxX/2-21);
     printw("1. KINDER:");
-    move(maxY/2-5, maxX/2);
+    move(maxY/2-2, maxX/2-21);
     printw("2. BAJA ");
-    move(maxY/2-4, maxX/2);
+    move(maxY/2-1, maxX/2-21);
     printw("3. MEDIA: ");
-    move(maxY/2-3, maxX/2);
+    move(maxY/2, maxX/2-21);
     printw("4. ALTA: ");
-    move(maxY/2-2, maxX/2);
-    printw("5. ESTO ES IMPOSIBLE: ");
+    move(maxY/2+1, maxX/2-21);
+    printw("5. ESTO ES IMPOSIBLE:");
+    move(maxY/2+2, maxX/2-21);
     int opcion;
     scanw("%d", &opcion);
     switch (opcion)
@@ -106,8 +107,8 @@ void moverBloquesY(){ // Mueve la dirección de los bloques un renglón abajo
 
 
 void generadorBloque(int bloque){ // Genera de manera aleatoria la posicion en y de los bloques para que aparezcan nuevamente
-    int renglonRandom = rand() % 30;
-    int espacioRandom = rand() % 105;
+    int renglonRandom = rand() % maxY;
+    int espacioRandom = rand() % maxX;
     direccionesBloques[bloque][1] = -renglonRandom;
     direccionesBloques[bloque][0] = espacioRandom;
 
@@ -154,24 +155,18 @@ int comprobarCoincidencia (int bloque){
 
 
 void gameOver(){//Imprime puntaje, segundos, y si deseamos continuar
-                    move(0,70);
-                    printw("Perdiste :c\n");
-                    
-                    move(2,70);
-                    printw("Puntaje: %d\n", puntaje);
-                
-                    move(3,70);
-                    printw("Tiempo: %d\n", seg);
-    
-                    move(5,70);
-                    printw("¿Qué desea hacer? \n");
-
-                    move(6,70);
-                    printw("Presione tres veces ESC para salir \n");
-
-                    move(7,70);
-                    printw("Presione tres veces ENTER para continuar \n");
-
+                    move(maxY/2-3, maxX/2-23);
+                    printw("Perdiste :c");                    
+                    move(maxY/2-2, maxX/2-23);
+                    printw("Puntaje: %d", puntaje);                
+                    move(maxY/2-1, maxX/2-23);
+                    printw("Tiempo: %d", seg);    
+                    move(maxY/2, maxX/2-23);
+                    printw("¿Qué desea hacer? ");
+                    move(maxY/2+1, maxX/2-23);
+                    printw("Presione tres veces ESC para salir ");
+                    move(maxY/2+2, maxX/2-23);
+                    printw("Presione tres veces ENTER para continuar ");
                     refresh();
     
 }
