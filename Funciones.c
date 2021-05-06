@@ -88,7 +88,7 @@ void dibujar(){
         x = direccionesBloques[i][0];
         y = direccionesBloques[i][1];
 
-        if(y > maxY - 5){ // Detecta si los bloques bajaron demasiado
+        if(y > maxY - 4){ // Detecta si los bloques bajaron demasiado
             generadorBloque(i);
         }
         if(x+1 < maxX){ // Detecta que los bloques quepan en el margen
