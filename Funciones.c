@@ -4,10 +4,16 @@
 
 /* c�digo implementaci�n de todas las funciones */
 void crearVentana(){
-    juego = initscr(); // Crea la ventana   
-    start_color(); // Inicia los colores
-    init_pair(1, COLOR_BLACK, COLOR_BLUE); // Colores para el fondo
-    bkgd(COLOR_PAIR(1)); // Pone color al fondo
+    juego = initscr(); // Crea la ventana
+    //inicializacion de colores
+    if(has_colors())
+	start_color();
+    init_pair(1,COLOR_RED,COLOR_WHITE); //texto
+    init_pair(2,COLOR_BLUE,COLOR_WHITE); //mono
+    init_pair(3,COLOR_MAGENTA, COLOR_MAGENTA); //cubos
+    bkgd(COLOR_PAIR(1));
+    attron(COLOR_PAIR(1));
+
     // Obtenemos resolución en espacios y renglones
 	maxX = getmaxx(juego); 
 	maxY = getmaxy(juego);
@@ -16,18 +22,24 @@ void crearVentana(){
 }
 
 void menuInicio(){
+    //attron(COLOR_PAIR(1)); // Pone color
+    attron(A_BOLD);
+    attron(A_BLINK);
+    move(maxY/2-6, maxX/2-21);
+    printw("¡¡BIENVENIDO A METEORO!!");
+    attroff(A_BLINK);
     move(maxY/2-4, maxX/2-21);
-    printw("Bienvenido a Metoro, escoja la dificultad: ");
+    printw("Escoja la dificultad: ");
     move(maxY/2-3, maxX/2-21);
-    printw("1. KINDER:");
+    printw("1. Kinder");
     move(maxY/2-2, maxX/2-21);
-    printw("2. BAJA ");
+    printw("2. Baja ");
     move(maxY/2-1, maxX/2-21);
-    printw("3. MEDIA: ");
+    printw("3. Media ");
     move(maxY/2, maxX/2-21);
-    printw("4. ALTA: ");
+    printw("4. Alta ");
     move(maxY/2+1, maxX/2-21);
-    printw("5. ESTO ES IMPOSIBLE:");
+    printw("5. ESTO ES IMPOSIBLE");
     move(maxY/2+2, maxX/2-21);
     int opcion;
     scanw("%d", &opcion);
@@ -54,7 +66,8 @@ void menuInicio(){
 
 void dibujar(){
     clear();
-    /* Pintura del monito */    
+    /* Pintura del monito */
+    attron(COLOR_PAIR(2));    
     move(posY, posX);
     printw("  O");   
     move(posY+2, posX);
@@ -69,6 +82,7 @@ void dibujar(){
     
 
     /* Pintura de los bloques */
+    attron(COLOR_PAIR(3));
     int x, y;
     for(int i = 0; i < NBLOQUES; i++){
         x = direccionesBloques[i][0];
@@ -88,6 +102,7 @@ void dibujar(){
             }
         }  
     }
+    attron(COLOR_PAIR(1));
     move(0,0);
     printw("Puntaje: %d\n",puntaje);
     printw("Time: %d\n",seg);
@@ -155,17 +170,19 @@ int comprobarCoincidencia (int bloque){
 
 
 void gameOver(){//Imprime puntaje, segundos, y si deseamos continuar
+                    move(maxY/2-4, maxX/2-23);
+                    printw("-------------- Perdiste :( --------------");                    
                     move(maxY/2-3, maxX/2-23);
-                    printw("Perdiste :c");                    
-                    move(maxY/2-2, maxX/2-23);
                     printw("Puntaje: %d", puntaje);                
-                    move(maxY/2-1, maxX/2-23);
+                    move(maxY/2-2, maxX/2-23);
                     printw("Tiempo: %d", seg);    
-                    move(maxY/2, maxX/2-23);
-                    printw("¿Qué desea hacer? ");
-                    move(maxY/2+1, maxX/2-23);
-                    printw("Presione tres veces ESC para salir ");
+                    move(maxY/2-1, maxX/2-23);
+		    printw("-----------------------------------------");
+		    move(maxY/2+1, maxX/2-23);
+		    printw("¿Qué desea hacer? ");
                     move(maxY/2+2, maxX/2-23);
+                    printw("Presione tres veces ESC para salir ");
+                    move(maxY/2+3, maxX/2-23);
                     printw("Presione tres veces ENTER para continuar ");
                     refresh();
     
